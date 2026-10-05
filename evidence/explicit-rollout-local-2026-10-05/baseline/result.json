@@ -1,0 +1,58 @@
+{
+  "mode": "baseline",
+  "binarySHA256": "58e282e77471ee08a3931c932b2cfa42322aa1f81681bad19ad477f2a99b9d20",
+  "passed": true,
+  "observationSeconds": 60,
+  "initial": {
+    "kubeproxy-safe-rollout-worker": {
+      "pod": "kube-proxy-5r7fr",
+      "uid": "b097bbf5-061f-4da1-936a-1ed3ba55c325",
+      "containerID": "containerd://265b8b903920c2e1b7144752fdd15862ae6a72e95c4c3aed89fc88416a1639c5",
+      "restarts": 0,
+      "ready": true,
+      "configMap": "kube-proxy"
+    },
+    "kubeproxy-safe-rollout-control-plane": {
+      "pod": "kube-proxy-fwr8k",
+      "uid": "c9aa0537-a25f-4715-ac13-6fe08e16c8dd",
+      "containerID": "containerd://1b86653afafe7b464ce2294b97ed8fe1aeb73563db49cf466cace07a38450cdd",
+      "restarts": 0,
+      "ready": true,
+      "configMap": "kube-proxy"
+    },
+    "kubeproxy-safe-rollout-worker2": {
+      "pod": "kube-proxy-mb2r7",
+      "uid": "fb96affe-4798-43f4-94a3-d80400476b2c",
+      "containerID": "containerd://df5f4dd85971db3fc3a006d02eb507b7febccfc27f271a50b5cd2c2497012168",
+      "restarts": 0,
+      "ready": true,
+      "configMap": "kube-proxy"
+    }
+  },
+  "directWrite": {
+    "kubeproxy-safe-rollout-worker": {
+      "pod": "kube-proxy-5r7fr",
+      "uid": "b097bbf5-061f-4da1-936a-1ed3ba55c325",
+      "containerID": "containerd://d54235d53ea84ec843d4f398f227ed851a395218f2edadbc72b42f1e6073b156",
+      "restarts": 1,
+      "ready": true,
+      "configMap": "kube-proxy"
+    },
+    "kubeproxy-safe-rollout-control-plane": {
+      "pod": "kube-proxy-fwr8k",
+      "uid": "c9aa0537-a25f-4715-ac13-6fe08e16c8dd",
+      "containerID": "containerd://350375f2ef38e403ddd03ebb6a627ace8d081b4dd66d44bcf2b047992aa8ccd7",
+      "restarts": 1,
+      "ready": true,
+      "configMap": "kube-proxy"
+    },
+    "kubeproxy-safe-rollout-worker2": {
+      "pod": "kube-proxy-mb2r7",
+      "uid": "fb96affe-4798-43f4-94a3-d80400476b2c",
+      "containerID": "containerd://b282daa042b68f8d21e23c41b3b0d9db8e283c9135c0f7ea715e7829a1b35d29",
+      "restarts": 1,
+      "ready": true,
+      "configMap": "kube-proxy"
+    }
+  }
+}

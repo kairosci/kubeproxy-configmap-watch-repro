@@ -1,0 +1,160 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "DaemonSet",
+  "metadata": {
+    "annotations": {
+      "deprecated.daemonset.template.generation": "2"
+    },
+    "creationTimestamp": "2026-10-05T16:29:02Z",
+    "generation": 2,
+    "labels": {
+      "k8s-app": "kube-proxy"
+    },
+    "name": "kube-proxy",
+    "namespace": "kube-system",
+    "resourceVersion": "757",
+    "uid": "080c1d6f-a0b4-4f57-b43b-ea0dd72ec2cc"
+  },
+  "spec": {
+    "minReadySeconds": 10,
+    "revisionHistoryLimit": 10,
+    "selector": {
+      "matchLabels": {
+        "k8s-app": "kube-proxy"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "k8s-app": "kube-proxy"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "command": [
+              "/repro/kube-proxy-58e282e77471",
+              "--config=/var/lib/kube-proxy/config.conf",
+              "--hostname-override=$(NODE_NAME)"
+            ],
+            "env": [
+              {
+                "name": "NODE_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "apiVersion": "v1",
+                    "fieldPath": "spec.nodeName"
+                  }
+                }
+              }
+            ],
+            "image": "registry.k8s.io/kube-proxy:v1.33.1",
+            "imagePullPolicy": "IfNotPresent",
+            "name": "kube-proxy",
+            "readinessProbe": {
+              "failureThreshold": 3,
+              "httpGet": {
+                "path": "/healthz",
+                "port": 10256,
+                "scheme": "HTTP"
+              },
+              "periodSeconds": 2,
+              "successThreshold": 1,
+              "timeoutSeconds": 1
+            },
+            "resources": {},
+            "securityContext": {
+              "privileged": true
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "volumeMounts": [
+              {
+                "mountPath": "/repro",
+                "name": "test-binary",
+                "readOnly": true
+              },
+              {
+                "mountPath": "/var/lib/kube-proxy",
+                "name": "kube-proxy"
+              },
+              {
+                "mountPath": "/run/xtables.lock",
+                "name": "xtables-lock"
+              },
+              {
+                "mountPath": "/lib/modules",
+                "name": "lib-modules",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "hostNetwork": true,
+        "nodeSelector": {
+          "kubernetes.io/os": "linux"
+        },
+        "priorityClassName": "system-node-critical",
+        "restartPolicy": "Always",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "kube-proxy",
+        "serviceAccountName": "kube-proxy",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+          {
+            "operator": "Exists"
+          }
+        ],
+        "volumes": [
+          {
+            "hostPath": {
+              "path": "/opt/kubeproxy-safe-rollout",
+              "type": "Directory"
+            },
+            "name": "test-binary"
+          },
+          {
+            "configMap": {
+              "defaultMode": 420,
+              "name": "kube-proxy"
+            },
+            "name": "kube-proxy"
+          },
+          {
+            "hostPath": {
+              "path": "/run/xtables.lock",
+              "type": "FileOrCreate"
+            },
+            "name": "xtables-lock"
+          },
+          {
+            "hostPath": {
+              "path": "/lib/modules",
+              "type": ""
+            },
+            "name": "lib-modules"
+          }
+        ]
+      }
+    },
+    "updateStrategy": {
+      "rollingUpdate": {
+        "maxSurge": 0,
+        "maxUnavailable": 1
+      },
+      "type": "RollingUpdate"
+    }
+  },
+  "status": {
+    "currentNumberScheduled": 3,
+    "desiredNumberScheduled": 3,
+    "numberAvailable": 3,
+    "numberMisscheduled": 0,
+    "numberReady": 3,
+    "observedGeneration": 2,
+    "updatedNumberScheduled": 3
+  }
+}

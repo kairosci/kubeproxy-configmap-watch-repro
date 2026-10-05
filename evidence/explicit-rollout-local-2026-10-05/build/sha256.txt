@@ -1,0 +1,3 @@
+58e282e77471ee08a3931c932b2cfa42322aa1f81681bad19ad477f2a99b9d20  bin/kube-proxy-baseline
+33b907e47c9d772e5787828d51b838a751b7e8d87587b6d8eff673800b054abb  bin/kube-proxy-patched
+30bb67d903a0fa6429ad7a55bad27234f62cb73e4ded7feb77df70915d62cdd9  patches/kube-proxy-startup-config.patch

@@ -1,0 +1,76 @@
+name: Verify explicit kube-proxy rollout
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  safe-rollout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      KIND_EXPERIMENTAL_PROVIDER: docker
+      KUBECONFIG: ${{ github.workspace }}/kubeconfig
+      CGO_ENABLED: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check out the exact Kubernetes PR base
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: kubernetes/kubernetes
+          ref: 7de79d40aae24d6baca355d7f2053e1f3c104a74
+          path: kubernetes-source
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: '1.27.1'
+          cache: false
+      - name: Build baseline and patched binaries from the same source revision
+        working-directory: kubernetes-source
+        run: |
+          set -euo pipefail
+          mkdir -p ../bin ../artifacts/build
+          git rev-parse HEAD > ../artifacts/build/kubernetes-base.txt
+          go version > ../artifacts/build/go-version.txt
+          go build -p 2 -o ../bin/kube-proxy-baseline ./cmd/kube-proxy
+          git apply --check ../patches/kube-proxy-startup-config.patch
+          git apply ../patches/kube-proxy-startup-config.patch
+          go test -p 2 ./cmd/kube-proxy/app | tee ../artifacts/build/unit-tests.log
+          go build -p 2 -o ../bin/kube-proxy-patched ./cmd/kube-proxy
+          sha256sum ../bin/kube-proxy-* ../patches/kube-proxy-startup-config.patch > ../artifacts/build/sha256.txt
+      - name: Install pinned kind and kubectl
+        run: |
+          set -euo pipefail
+          curl -fsSL -o bin/kind https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-linux-amd64
+          curl -fsSL -o bin/kind.sha256 https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-linux-amd64.sha256sum
+          echo "$(cut -d ' ' -f1 bin/kind.sha256)  bin/kind" | sha256sum --check
+          curl -fsSL -o bin/kubectl https://dl.k8s.io/release/v1.33.1/bin/linux/amd64/kubectl
+          curl -fsSL -o bin/kubectl.sha256 https://dl.k8s.io/release/v1.33.1/bin/linux/amd64/kubectl.sha256
+          echo "$(cat bin/kubectl.sha256)  bin/kubectl" | sha256sum --check
+          chmod +x bin/kind bin/kubectl
+          echo "$PWD/bin" >> "$GITHUB_PATH"
+      - name: Create dedicated three-node cluster
+        run: kind create cluster --name kubeproxy-safe-rollout --config kind-safe-rollout.yaml --image kindest/node:v1.33.1@sha256:14ffd6ee8a3daa20cc934ba786626b181e1797268c5465f2c299a7cf54494c77 --kubeconfig "$KUBECONFIG" --wait 180s
+      - name: Confirm the baseline restarts on direct writes
+        run: python3 -u safe_rollout.py --runtime docker --kubeconfig "$KUBECONFIG" --proxy-binary bin/kube-proxy-baseline --mode baseline --output artifacts/baseline
+      - name: Verify startup-only config, controlled rollout, failure containment and rollback
+        run: python3 -u safe_rollout.py --runtime docker --kubeconfig "$KUBECONFIG" --proxy-binary bin/kube-proxy-patched --mode patched --output artifacts/patched
+      - name: Collect diagnostics
+        if: always()
+        run: |
+          mkdir -p artifacts/diagnostics
+          kubectl --context kind-kubeproxy-safe-rollout -n kube-system get pods -o wide > artifacts/diagnostics/pods.txt 2>&1 || true
+          kubectl --context kind-kubeproxy-safe-rollout -n kube-system get events > artifacts/diagnostics/events.txt 2>&1 || true
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: kubeproxy-safe-rollout-evidence
+          path: artifacts/
+          retention-days: 30
+      - name: Delete test cluster
+        if: always()
+        run: kind delete cluster --name kubeproxy-safe-rollout --kubeconfig "$KUBECONFIG"

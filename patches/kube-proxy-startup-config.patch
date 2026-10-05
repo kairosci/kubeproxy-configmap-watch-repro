@@ -1,0 +1,436 @@
+diff --git c/cmd/kube-proxy/app/options.go w/cmd/kube-proxy/app/options.go
+index efc444243b2..aad4b0a3c8c 100644
+--- c/cmd/kube-proxy/app/options.go
++++ w/cmd/kube-proxy/app/options.go
+@@ -23,7 +23,6 @@ import (
+ 	"strings"
+ 	"time"
+ 
+-	"github.com/fsnotify/fsnotify"
+ 	"github.com/spf13/pflag"
+ 
+ 	"k8s.io/apimachinery/pkg/runtime"
+@@ -43,14 +42,13 @@ import (
+ 	kubeproxyconfigv1alpha1 "k8s.io/kubernetes/pkg/proxy/apis/config/v1alpha1"
+ 	"k8s.io/kubernetes/pkg/proxy/apis/config/validation"
+ 	proxyutil "k8s.io/kubernetes/pkg/proxy/util"
+-	"k8s.io/kubernetes/pkg/util/filesystem"
+ 	utilflag "k8s.io/kubernetes/pkg/util/flag"
+ 	"k8s.io/utils/ptr"
+ )
+ 
+ // Options contains everything necessary to create and run a proxy server.
+ type Options struct {
+-	// ConfigFile is the location of the proxy server's configuration file.
++	// ConfigFile is the configuration file loaded once at startup.
+ 	ConfigFile string
+ 	// WriteConfigTo is the path where the default configuration will be written.
+ 	WriteConfigTo string
+@@ -60,12 +58,6 @@ type Options struct {
+ 	InitAndExit bool
+ 	// config is the proxy server's configuration object.
+ 	config *kubeproxyconfig.KubeProxyConfiguration
+-	// watcher is used to watch on the update change of ConfigFile
+-	watcher filesystem.FSWatcher
+-	// proxyServer is the interface to run the proxy server
+-	proxyServer proxyRun
+-	// errCh is the channel that errors will be sent
+-	errCh chan error
+ 	// flagz is the Reader interface to get flags for the flagz page.
+ 	flagz flagz.Reader
+ 
+@@ -99,7 +91,7 @@ type Options struct {
+ func (o *Options) AddFlags(fs *pflag.FlagSet) {
+ 	o.addOSFlags(fs)
+ 
+-	fs.StringVar(&o.ConfigFile, "config", o.ConfigFile, "The path to the configuration file.")
++	fs.StringVar(&o.ConfigFile, "config", o.ConfigFile, "The path to the configuration file. Changes take effect after restarting kube-proxy. For a DaemonSet, roll out a new ConfigMap reference to apply changes incrementally.")
+ 	fs.StringVar(&o.WriteConfigTo, "write-config-to", o.WriteConfigTo, "If set, write the default configuration values to this file and exit.")
+ 
+ 	fs.BoolVar(&o.CleanupAndExit, "cleanup", o.CleanupAndExit, "If true cleanup iptables and ipvs rules and exit.")
+@@ -197,7 +189,6 @@ func NewOptions() *Options {
+ 		config:      newKubeProxyConfiguration(),
+ 		healthzPort: ports.ProxyHealthzPort,
+ 		metricsPort: ports.ProxyStatusPort,
+-		errCh:       make(chan error),
+ 		logger:      klog.FromContext(context.Background()),
+ 	}
+ }
+@@ -224,10 +215,6 @@ func (o *Options) Complete(fs *pflag.FlagSet) error {
+ 		// when it contains no logging settings).
+ 		_ = copyLogsFromFlags(fs, &c.Logging)
+ 		o.config = c
+-
+-		if err := o.initWatcher(); err != nil {
+-			return err
+-		}
+ 	} else {
+ 		o.processV1Alpha1Flags(fs)
+ 	}
+@@ -291,34 +278,6 @@ func copyLogsFromFlags(from *pflag.FlagSet, to *logsapi.LoggingConfiguration) er
+ 	return err
+ }
+ 
+-// Creates a new filesystem watcher and adds watches for the config file.
+-func (o *Options) initWatcher() error {
+-	fswatcher := filesystem.NewFsnotifyWatcher()
+-	err := fswatcher.Init(o.eventHandler, o.errorHandler)
+-	if err != nil {
+-		return err
+-	}
+-	err = fswatcher.AddWatch(o.ConfigFile)
+-	if err != nil {
+-		return err
+-	}
+-	o.watcher = fswatcher
+-	return nil
+-}
+-
+-func (o *Options) eventHandler(ent fsnotify.Event) {
+-	if ent.Has(fsnotify.Write) || ent.Has(fsnotify.Rename) {
+-		// error out when ConfigFile is updated
+-		o.errCh <- fmt.Errorf("content of the proxy server's configuration file was updated")
+-		return
+-	}
+-	o.errCh <- nil
+-}
+-
+-func (o *Options) errorHandler(err error) {
+-	o.errCh <- err
+-}
+-
+ // processHostnameOverrideFlag processes hostname-override flag
+ func (o *Options) processHostnameOverrideFlag() error {
+ 	// Check if hostname-override flag is set and use value since configFile always overrides
+@@ -363,7 +322,6 @@ func (o *Options) Validate() error {
+ 
+ // Run runs the specified ProxyServer.
+ func (o *Options) Run(ctx context.Context) error {
+-	defer close(o.errCh)
+ 	if len(o.WriteConfigTo) > 0 {
+ 		return o.writeConfigFile()
+ 	}
+@@ -383,29 +341,7 @@ func (o *Options) Run(ctx context.Context) error {
+ 		return nil
+ 	}
+ 
+-	o.proxyServer = proxyServer
+-	return o.runLoop(ctx)
+-}
+-
+-// runLoop will watch on the update change of the proxy server's configuration file.
+-// Return an error when updated
+-func (o *Options) runLoop(ctx context.Context) error {
+-	if o.watcher != nil {
+-		o.watcher.Run(ctx)
+-	}
+-
+-	// run the proxy in goroutine
+-	go func() {
+-		err := o.proxyServer.Run(ctx)
+-		o.errCh <- err
+-	}()
+-
+-	for {
+-		err := <-o.errCh
+-		if err != nil {
+-			return err
+-		}
+-	}
++	return proxyServer.Run(ctx)
+ }
+ 
+ func (o *Options) writeConfigFile() (err error) {
+diff --git c/cmd/kube-proxy/app/server.go w/cmd/kube-proxy/app/server.go
+index 901e2da7820..1a22f63b87b 100644
+--- c/cmd/kube-proxy/app/server.go
++++ w/cmd/kube-proxy/app/server.go
+@@ -92,11 +92,6 @@ func init() {
+ 	utilruntime.Must(logsapi.AddFeatureGates(utilfeature.DefaultMutableFeatureGate))
+ }
+ 
+-// proxyRun defines the interface to run a specified ProxyServer
+-type proxyRun interface {
+-	Run(ctx context.Context) error
+-}
+-
+ // NewProxyCommand creates a *cobra.Command object with default parameters
+ func NewProxyCommand() *cobra.Command {
+ 	opts := NewOptions()
+diff --git c/cmd/kube-proxy/app/server_linux_test.go w/cmd/kube-proxy/app/server_linux_test.go
+index c090e065b58..2a27e7c6ad8 100644
+--- c/cmd/kube-proxy/app/server_linux_test.go
++++ w/cmd/kube-proxy/app/server_linux_test.go
+@@ -19,13 +19,11 @@ limitations under the License.
+ package app
+ 
+ import (
+-	"fmt"
+ 	"os"
+ 	"path/filepath"
+ 	"reflect"
+ 	"strings"
+ 	"testing"
+-	"time"
+ 
+ 	"github.com/spf13/pflag"
+ 	v1 "k8s.io/api/core/v1"
+@@ -432,119 +430,88 @@ func Test_getLocalDetectors(t *testing.T) {
+ 	}
+ }
+ 
+-func TestConfigChange(t *testing.T) {
+-	setUp := func() (*os.File, string, error) {
+-		tempDir, err := os.MkdirTemp("", "kubeproxy-config-change")
+-		if err != nil {
+-			return nil, "", fmt.Errorf("unable to create temporary directory: %v", err)
+-		}
+-		fullPath := filepath.Join(tempDir, "kube-proxy-config")
+-		file, err := os.Create(fullPath)
+-		if err != nil {
+-			return nil, "", fmt.Errorf("unexpected error when creating temp file: %v", err)
+-		}
+-
+-		_, err = file.WriteString(`apiVersion: kubeproxy.config.k8s.io/v1alpha1
+-bindAddress: 0.0.0.0
+-bindAddressHardFail: false
+-clientConnection:
+-  acceptContentTypes: ""
+-  burst: 10
+-  contentType: application/vnd.kubernetes.protobuf
+-  kubeconfig: /var/lib/kube-proxy/kubeconfig.conf
+-  qps: 5
+-clusterCIDR: 10.244.0.0/16
+-configSyncPeriod: 15m0s
+-conntrack:
+-  maxPerCore: 32768
+-  min: 131072
+-  tcpCloseWaitTimeout: 1h0m0s
+-  tcpEstablishedTimeout: 24h0m0s
+-enableProfiling: false
+-healthzBindAddress: 0.0.0.0:10256
+-hostnameOverride: ""
+-iptables:
+-  masqueradeAll: false
+-  masqueradeBit: 14
+-  minSyncPeriod: 0s
+-  syncPeriod: 30s
+-ipvs:
+-  excludeCIDRs: null
+-  minSyncPeriod: 0s
+-  scheduler: ""
+-  syncPeriod: 30s
++// Configuration is a startup snapshot: file updates must not change the running
++// proxy's configuration. A replacement process loads the updated contents.
++func TestConfigChangeRequiresRestart(t *testing.T) {
++	const initial = `apiVersion: kubeproxy.config.k8s.io/v1alpha1
+ kind: KubeProxyConfiguration
+-metricsBindAddress: 127.0.0.1:10249
+-mode: ""
+-nodePortAddresses: null
+-oomScoreAdj: -999
+-portRange: ""
+-detectLocalMode: "BridgeInterface"`)
+-		if err != nil {
+-			return nil, "", fmt.Errorf("unexpected error when writing content to temp kube-proxy config file: %v", err)
+-		}
+-
+-		return file, tempDir, nil
+-	}
+-
+-	tearDown := func(file *os.File, tempDir string) {
+-		file.Close()
+-		os.RemoveAll(tempDir)
+-	}
+-
+-	testCases := []struct {
+-		name        string
+-		proxyServer proxyRun
+-		append      bool
+-		expectedErr string
+-	}{
+-		{
+-			name:        "update config file",
+-			proxyServer: new(fakeProxyServerLongRun),
+-			append:      true,
+-			expectedErr: "content of the proxy server's configuration file was updated",
+-		},
+-		{
+-			name:        "fake error",
+-			proxyServer: new(fakeProxyServerError),
+-			expectedErr: "mocking error from ProxyServer.Run()",
+-		},
+-	}
+-
+-	for _, tc := range testCases {
+-		_, ctx := ktesting.NewTestContext(t)
+-		file, tempDir, err := setUp()
+-		if err != nil {
+-			t.Fatalf("unexpected error when setting up environment: %v", err)
+-		}
+-
+-		opt := NewOptions()
+-		opt.ConfigFile = file.Name()
+-		err = opt.Complete(new(pflag.FlagSet))
+-		if err != nil {
+-			t.Fatal(err)
+-		}
+-		opt.proxyServer = tc.proxyServer
+-
+-		errCh := make(chan error, 1)
+-		go func() {
+-			errCh <- opt.runLoop(ctx)
+-		}()
+-
+-		if tc.append {
+-			file.WriteString("append fake content")
+-		}
+-
+-		select {
+-		case err := <-errCh:
+-			if err != nil {
+-				if !strings.Contains(err.Error(), tc.expectedErr) {
+-					t.Errorf("[%s] Expected error containing %v, got %v", tc.name, tc.expectedErr, err)
++bindAddress: 0.0.0.0
++logging:
++  verbosity: 0
++`
++	updated := strings.Replace(initial, "verbosity: 0", "verbosity: 1", 1)
++	for _, mutation := range []string{"direct write", "atomic replacement", "ConfigMap projection"} {
++		t.Run(mutation, func(t *testing.T) {
++			dir := t.TempDir()
++			configFile := filepath.Join(dir, "config.conf")
++			write := func(path, content string) {
++				t.Helper()
++				if err := os.WriteFile(path, []byte(content), 0644); err != nil {
++					t.Fatal(err)
+ 				}
+ 			}
+-		case <-time.After(10 * time.Second):
+-			t.Errorf("[%s] Timeout: unable to get any events or internal timeout.", tc.name)
+-		}
+-		tearDown(file, tempDir)
++			if mutation == "ConfigMap projection" {
++				oldDir := filepath.Join(dir, "..old")
++				if err := os.Mkdir(oldDir, 0755); err != nil {
++					t.Fatal(err)
++				}
++				write(filepath.Join(oldDir, "config.conf"), initial)
++				if err := os.Symlink("..old", filepath.Join(dir, "..data")); err != nil {
++					t.Fatal(err)
++				}
++				if err := os.Symlink("..data/config.conf", configFile); err != nil {
++					t.Fatal(err)
++				}
++			} else {
++				write(configFile, initial)
++			}
++			load := func() *Options {
++				t.Helper()
++				opt := NewOptions()
++				opt.ConfigFile = configFile
++				if err := opt.Complete(new(pflag.FlagSet)); err != nil {
++					t.Fatal(err)
++				}
++				if err := opt.Validate(); err != nil {
++					t.Fatal(err)
++				}
++				return opt
++			}
++			opt := load()
++			if opt.config.Logging.Verbosity != 0 {
++				t.Fatalf("initial verbosity = %d, want 0", opt.config.Logging.Verbosity)
++			}
++			switch mutation {
++			case "direct write":
++				write(configFile, updated)
++			case "atomic replacement":
++				replacement := filepath.Join(dir, "config.tmp")
++				write(replacement, updated)
++				if err := os.Rename(replacement, configFile); err != nil {
++					t.Fatal(err)
++				}
++			case "ConfigMap projection":
++				newDir := filepath.Join(dir, "..new")
++				if err := os.Mkdir(newDir, 0755); err != nil {
++					t.Fatal(err)
++				}
++				write(filepath.Join(newDir, "config.conf"), updated)
++				if err := os.Symlink("..new", filepath.Join(dir, "..data_tmp")); err != nil {
++					t.Fatal(err)
++				}
++				if err := os.Rename(filepath.Join(dir, "..data_tmp"), filepath.Join(dir, "..data")); err != nil {
++					t.Fatal(err)
++				}
++				if err := os.RemoveAll(filepath.Join(dir, "..old")); err != nil {
++					t.Fatal(err)
++				}
++			}
++			if opt.config.Logging.Verbosity != 0 {
++				t.Fatalf("running config changed without restart: verbosity = %d", opt.config.Logging.Verbosity)
++			}
++			if restarted := load(); restarted.config.Logging.Verbosity != 1 {
++				t.Fatalf("verbosity after restart = %d, want 1", restarted.config.Logging.Verbosity)
++			}
++		})
+ 	}
+ }
+diff --git c/cmd/kube-proxy/app/server_test.go w/cmd/kube-proxy/app/server_test.go
+index 516e4fe5340..479b6caf548 100644
+--- c/cmd/kube-proxy/app/server_test.go
++++ w/cmd/kube-proxy/app/server_test.go
+@@ -17,10 +17,7 @@ limitations under the License.
+ package app
+ 
+ import (
+-	"context"
+ 	"encoding/json"
+-	"errors"
+-	"fmt"
+ 	"io"
+ 	"net"
+ 	"net/http"
+@@ -28,7 +25,6 @@ import (
+ 	"reflect"
+ 	"strings"
+ 	"testing"
+-	"time"
+ 
+ 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
+ 	"k8s.io/apimachinery/pkg/util/sets"
+@@ -49,35 +45,6 @@ import (
+ 	netutils "k8s.io/utils/net"
+ )
+ 
+-type fakeProxyServerLongRun struct{}
+-
+-// Run runs the specified ProxyServer.
+-func (s *fakeProxyServerLongRun) Run(ctx context.Context) error {
+-	for {
+-		time.Sleep(2 * time.Second)
+-	}
+-}
+-
+-// CleanupAndExit runs in the specified ProxyServer.
+-func (s *fakeProxyServerLongRun) CleanupAndExit() error {
+-	return nil
+-}
+-
+-type fakeProxyServerError struct{}
+-
+-// Run runs the specified ProxyServer.
+-func (s *fakeProxyServerError) Run(ctx context.Context) error {
+-	for {
+-		time.Sleep(2 * time.Second)
+-		return fmt.Errorf("mocking error from ProxyServer.Run()")
+-	}
+-}
+-
+-// CleanupAndExit runs in the specified ProxyServer.
+-func (s *fakeProxyServerError) CleanupAndExit() error {
+-	return errors.New("mocking error from ProxyServer.CleanupAndExit()")
+-}
+-
+ // fakeMux matches the statusz mux interface used by statusz.Install:
+ // it needs Handle(path, handler) and ListedPaths().
+ type fakeMux struct {

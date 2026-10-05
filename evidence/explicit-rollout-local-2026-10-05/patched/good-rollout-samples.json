@@ -1,0 +1,459 @@
+[
+  {
+    "time": 1791218105.6680915,
+    "ready": 2,
+    "unchanged": 2,
+    "pods": {
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-psp6n",
+        "uid": "965c6a16-a0d3-4bd2-82bf-b7289f2d7ca5",
+        "containerID": "containerd://dd17c6c6fedbdba92a77f46cb7ceeaeb6836c4dcb3143da123d84e6be174d37f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218108.2194207,
+    "ready": 2,
+    "unchanged": 2,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": false,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-psp6n",
+        "uid": "965c6a16-a0d3-4bd2-82bf-b7289f2d7ca5",
+        "containerID": "containerd://dd17c6c6fedbdba92a77f46cb7ceeaeb6836c4dcb3143da123d84e6be174d37f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218110.7484088,
+    "ready": 3,
+    "unchanged": 2,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-psp6n",
+        "uid": "965c6a16-a0d3-4bd2-82bf-b7289f2d7ca5",
+        "containerID": "containerd://dd17c6c6fedbdba92a77f46cb7ceeaeb6836c4dcb3143da123d84e6be174d37f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218113.4797232,
+    "ready": 3,
+    "unchanged": 2,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-psp6n",
+        "uid": "965c6a16-a0d3-4bd2-82bf-b7289f2d7ca5",
+        "containerID": "containerd://dd17c6c6fedbdba92a77f46cb7ceeaeb6836c4dcb3143da123d84e6be174d37f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218116.1611607,
+    "ready": 3,
+    "unchanged": 2,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-psp6n",
+        "uid": "965c6a16-a0d3-4bd2-82bf-b7289f2d7ca5",
+        "containerID": "containerd://dd17c6c6fedbdba92a77f46cb7ceeaeb6836c4dcb3143da123d84e6be174d37f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218118.819781,
+    "ready": 2,
+    "unchanged": 1,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": null,
+        "restarts": 0,
+        "ready": false,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218121.3461592,
+    "ready": 3,
+    "unchanged": 1,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218124.0343094,
+    "ready": 3,
+    "unchanged": 1,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218126.6720464,
+    "ready": 3,
+    "unchanged": 1,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218129.379721,
+    "ready": 3,
+    "unchanged": 1,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-bf8c7",
+        "uid": "d8a566e3-8458-4d36-855b-a2ba0cf4d745",
+        "containerID": "containerd://9e6b975268d2f1dee650ffa47c671b4ae12b4c93d860717fd363494af451724f",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy"
+      }
+    }
+  },
+  {
+    "time": 1791218132.036805,
+    "ready": 3,
+    "unchanged": 0,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-c656w",
+        "uid": "3b36d61c-1f37-455e-aaeb-e94925bf0d0a",
+        "containerID": "containerd://1c5d3010ff09381c3d1b918cc07747c1032f8fdd182ce59c298859cb664d833c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      }
+    }
+  },
+  {
+    "time": 1791218134.726607,
+    "ready": 3,
+    "unchanged": 0,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-c656w",
+        "uid": "3b36d61c-1f37-455e-aaeb-e94925bf0d0a",
+        "containerID": "containerd://1c5d3010ff09381c3d1b918cc07747c1032f8fdd182ce59c298859cb664d833c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      }
+    }
+  },
+  {
+    "time": 1791218137.3916771,
+    "ready": 3,
+    "unchanged": 0,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-c656w",
+        "uid": "3b36d61c-1f37-455e-aaeb-e94925bf0d0a",
+        "containerID": "containerd://1c5d3010ff09381c3d1b918cc07747c1032f8fdd182ce59c298859cb664d833c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      }
+    }
+  },
+  {
+    "time": 1791218140.035912,
+    "ready": 3,
+    "unchanged": 0,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-c656w",
+        "uid": "3b36d61c-1f37-455e-aaeb-e94925bf0d0a",
+        "containerID": "containerd://1c5d3010ff09381c3d1b918cc07747c1032f8fdd182ce59c298859cb664d833c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      }
+    }
+  },
+  {
+    "time": 1791218142.7441196,
+    "ready": 3,
+    "unchanged": 0,
+    "pods": {
+      "kubeproxy-safe-rollout-worker": {
+        "pod": "kube-proxy-22xbr",
+        "uid": "5fc61e0c-11a0-4143-83fb-ce60e02112e5",
+        "containerID": "containerd://5171406ad45ad7f8069f0babe3273f3e6103fd231093c0b42968348025c2af4d",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-control-plane": {
+        "pod": "kube-proxy-5p42k",
+        "uid": "368df6c8-4808-4a1d-aeaf-2641147441ed",
+        "containerID": "containerd://5591c2ccf67c8a55447683e25ef39a611e60daed4da7a263893c6b6e83cdb68c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      },
+      "kubeproxy-safe-rollout-worker2": {
+        "pod": "kube-proxy-c656w",
+        "uid": "3b36d61c-1f37-455e-aaeb-e94925bf0d0a",
+        "containerID": "containerd://1c5d3010ff09381c3d1b918cc07747c1032f8fdd182ce59c298859cb664d833c",
+        "restarts": 0,
+        "ready": true,
+        "configMap": "kube-proxy-rollout-good"
+      }
+    }
+  }
+]

@@ -6,3 +6,4 @@ __pycache__/
 /*.log
 /*.json
 /watcher-after-projection.txt
+/kubernetes-source/
