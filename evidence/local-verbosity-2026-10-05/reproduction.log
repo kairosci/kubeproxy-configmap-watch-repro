@@ -1,0 +1,52 @@
+2026-10-05T18:07:17+0200 BEFORE {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:17+0200 VERSION {
+  "clientVersion": {
+    "major": "1",
+    "minor": "33",
+    "gitVersion": "v1.33.1",
+    "gitCommit": "8adc0f041b8e7ad1d30e29cc59c6ae7a15e19828",
+    "gitTreeState": "clean",
+    "buildDate": "2025-05-15T08:27:33Z",
+    "goVersion": "go1.24.2",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+  },
+  "kustomizeVersion": "v5.6.0",
+  "serverVersion": {
+    "major": "1",
+    "minor": "33",
+    "emulationMajor": "1",
+    "emulationMinor": "33",
+    "minCompatibilityMajor": "1",
+    "minCompatibilityMinor": "32",
+    "gitVersion": "v1.33.1",
+    "gitCommit": "8adc0f041b8e7ad1d30e29cc59c6ae7a15e19828",
+    "gitTreeState": "clean",
+    "buildDate": "2025-05-15T08:19:08Z",
+    "goVersion": "go1.24.2",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+  }
+}
+2026-10-05T18:07:18+0200 MOUNT BEFORE /var/lib/kubelet/pods/9a50db2c-36ec-480d-a386-dc676b5cf570/volumes/kubernetes.io~configmap/kube-proxy/..2026_10_05_16_06_33.2458008254/config.conf
+2026-10-05T18:07:18+0200 CONFIGMAP PATCHED logging.verbosity: 0 -> 1; # kubeproxy-watch-repro ConfigMap update 1791216438128393427
+2026-10-05T18:07:23+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:28+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:34+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:39+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:44+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:49+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:07:55+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:08:00+0200 WAITING FOR PROJECTION {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:08:01+0200 MOUNT UPDATED /var/lib/kubelet/pods/9a50db2c-36ec-480d-a386-dc676b5cf570/volumes/kubernetes.io~configmap/kube-proxy/..2026_10_05_16_07_58.3249762659/config.conf
+2026-10-05T18:08:01+0200 CONTENT SHA256 83352dafa4bc751ccd15e74eb94ae9cd830edc5df9d87599d5ab85a53394102a
+2026-10-05T18:08:11+0200 AFTER CONFIGMAP {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:08:21+0200 AFTER CONFIGMAP {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:08:31+0200 AFTER CONFIGMAP {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:08:41+0200 AFTER CONFIGMAP {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:08:51+0200 AFTER CONFIGMAP {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:09:01+0200 AFTER CONFIGMAP {"pod": "kube-proxy-nkwk7", "uid": "9a50db2c-36ec-480d-a386-dc676b5cf570", "restarts": 0, "containerID": "containerd://4c0404292ac2f5ee5397e812eda9c76b0c1891f55f2ab765f8a5604ed9e4a526"}
+2026-10-05T18:09:02+0200 REPRODUCED: mounted config changed, container identity and restart count unchanged
+2026-10-05T18:09:03+0200 CONTROL BEFORE {"pod": "kube-proxy-k5bcx", "uid": "d54132c8-23c4-4683-a0e2-56a2e2e1b3a0", "restarts": 0, "containerID": "containerd://b5b9e5b093f1d3f9eea6328651c9828778bb1647e07020ee8682e5e2c2b4baf2"}
+2026-10-05T18:09:05+0200 CONTROL RESTARTED {"pod": "kube-proxy-k5bcx", "uid": "d54132c8-23c4-4683-a0e2-56a2e2e1b3a0", "restarts": 1, "containerID": "containerd://2a344d68199bbe75fef0e0af16af3acb9eab82dc158ee74562024127da74442b"}
+2026-10-05T18:09:05+0200 PASS: ConfigMap replacement missed, direct write detected

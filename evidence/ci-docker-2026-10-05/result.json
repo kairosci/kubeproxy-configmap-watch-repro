@@ -1,0 +1,34 @@
+{
+  "reproduced": true,
+  "before": {
+    "pod": "kube-proxy-ck22f",
+    "uid": "a1eaff86-5c12-4fbb-9635-1c2e6f40d347",
+    "restarts": 0,
+    "containerID": "containerd://0f024cc698eb5707d56781c89cb39741e8b31abe2742c5d1497d88ccb989cc67"
+  },
+  "afterConfigMap": {
+    "pod": "kube-proxy-ck22f",
+    "uid": "a1eaff86-5c12-4fbb-9635-1c2e6f40d347",
+    "restarts": 0,
+    "containerID": "containerd://0f024cc698eb5707d56781c89cb39741e8b31abe2742c5d1497d88ccb989cc67"
+  },
+  "controlBefore": {
+    "pod": "kube-proxy-7ktsh",
+    "uid": "729349c6-1cbc-4547-9fe2-17db81db77f4",
+    "restarts": 0,
+    "containerID": "containerd://4aee545c953bb8d16bdce4a60e69bd41d8ac08c5ca209afa4343d2f75b4b2249"
+  },
+  "controlAfter": {
+    "pod": "kube-proxy-7ktsh",
+    "uid": "729349c6-1cbc-4547-9fe2-17db81db77f4",
+    "restarts": 1,
+    "containerID": "containerd://1d440fe78e9aaf9f805c6420d859227a35ddd080df7ad0949a67023ade9d3997"
+  },
+  "marker": "# kubeproxy-watch-repro ConfigMap update 1791216529614115405",
+  "configChange": "logging.verbosity: 0 -> 1",
+  "projectionSeconds": 72.31,
+  "observationSeconds": 60,
+  "controlRestartSeconds": 2.22,
+  "oldTarget": "/var/lib/kubelet/pods/a1eaff86-5c12-4fbb-9635-1c2e6f40d347/volumes/kubernetes.io~configmap/kube-proxy/..2026_10_05_16_08_36.1846586123/config.conf",
+  "newTarget": "/var/lib/kubelet/pods/a1eaff86-5c12-4fbb-9635-1c2e6f40d347/volumes/kubernetes.io~configmap/kube-proxy/..2026_10_05_16_10_00.3604848390/config.conf"
+}

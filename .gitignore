@@ -1,0 +1,8 @@
+/bin/
+/kubeconfig
+/artifacts/
+__pycache__/
+*.pyc
+/*.log
+/*.json
+/watcher-after-projection.txt

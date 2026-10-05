@@ -1,0 +1,53 @@
+name: Reproduce ConfigMap watch mismatch
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      KIND_EXPERIMENTAL_PROVIDER: docker
+      KUBECONFIG: ${{ github.workspace }}/kubeconfig
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install pinned kind and kubectl
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bin
+          curl -fsSL -o bin/kind https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-linux-amd64
+          curl -fsSL -o bin/kind.sha256 https://github.com/kubernetes-sigs/kind/releases/download/v0.33.0/kind-linux-amd64.sha256sum
+          echo "$(cut -d ' ' -f1 bin/kind.sha256)  bin/kind" | sha256sum --check
+          curl -fsSL -o bin/kubectl https://dl.k8s.io/release/v1.33.1/bin/linux/amd64/kubectl
+          curl -fsSL -o bin/kubectl.sha256 https://dl.k8s.io/release/v1.33.1/bin/linux/amd64/kubectl.sha256
+          echo "$(cat bin/kubectl.sha256)  bin/kubectl" | sha256sum --check
+          chmod +x bin/kind bin/kubectl
+          echo "$PWD/bin" >> "$GITHUB_PATH"
+      - name: Create unmodified Kubernetes v1.33.1 cluster
+        run: kind create cluster --name kubeproxy-watch-repro --image kindest/node:v1.33.1@sha256:14ffd6ee8a3daa20cc934ba786626b181e1797268c5465f2c299a7cf54494c77 --kubeconfig "$KUBECONFIG" --wait 120s
+      - name: Verify ConfigMap update is missed and direct write is detected
+        run: python3 -u reproduce.py --runtime docker --kubeconfig "$KUBECONFIG" --output artifacts
+      - name: Collect diagnostics
+        if: always()
+        run: |
+          mkdir -p artifacts
+          kubectl --kubeconfig "$KUBECONFIG" --context kind-kubeproxy-watch-repro -n kube-system get pods -o wide > artifacts/pods.txt 2>&1 || true
+          kubectl --kubeconfig "$KUBECONFIG" --context kind-kubeproxy-watch-repro -n kube-system get events > artifacts/events.txt 2>&1 || true
+          docker logs kubeproxy-watch-repro-control-plane > artifacts/node.log 2>&1 || true
+      - name: Upload reproduction evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: kubeproxy-watch-evidence
+          path: artifacts/
+          retention-days: 30
+      - name: Delete test cluster
+        if: always()
+        run: kind delete cluster --name kubeproxy-watch-repro --kubeconfig "$KUBECONFIG"
