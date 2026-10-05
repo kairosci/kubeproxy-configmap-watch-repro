@@ -1,0 +1,245 @@
+{
+  "kubeproxy-safe-rollout-worker2": {
+    "kind": "KubeProxyConfiguration",
+    "apiVersion": "kubeproxy.config.k8s.io/v1alpha1",
+    "clientConnection": {
+      "kubeconfig": "/var/lib/kube-proxy/kubeconfig.conf",
+      "acceptContentTypes": "",
+      "contentType": "application/vnd.kubernetes.protobuf",
+      "qps": 5,
+      "burst": 10
+    },
+    "logging": {
+      "format": "text",
+      "flushFrequency": "5s",
+      "verbosity": 0,
+      "options": {
+        "text": {
+          "infoBufferSize": "0"
+        },
+        "json": {
+          "infoBufferSize": "0"
+        }
+      }
+    },
+    "hostnameOverride": "kubeproxy-safe-rollout-worker2",
+    "bindAddress": "0.0.0.0",
+    "healthzBindAddress": "0.0.0.0:10256",
+    "metricsBindAddress": "127.0.0.1:10249",
+    "bindAddressHardFail": false,
+    "enableProfiling": false,
+    "showHiddenMetricsForVersion": "",
+    "mode": "iptables",
+    "iptables": {
+      "masqueradeBit": 14,
+      "masqueradeAll": false,
+      "localhostNodePorts": true,
+      "syncPeriod": "30s",
+      "minSyncPeriod": "1s"
+    },
+    "ipvs": {
+      "syncPeriod": "0s",
+      "minSyncPeriod": "0s",
+      "scheduler": "",
+      "excludeCIDRs": null,
+      "strictARP": false,
+      "tcpTimeout": "0s",
+      "tcpFinTimeout": "0s",
+      "udpTimeout": "0s"
+    },
+    "nftables": {
+      "masqueradeBit": 14,
+      "masqueradeAll": false,
+      "syncPeriod": "0s",
+      "minSyncPeriod": "0s"
+    },
+    "winkernel": {
+      "networkName": "",
+      "sourceVip": "",
+      "enableDSR": false,
+      "rootHnsEndpointName": "",
+      "forwardHealthCheckVip": false
+    },
+    "detectLocalMode": "ClusterCIDR",
+    "detectLocal": {
+      "bridgeInterface": "",
+      "interfaceNamePrefix": ""
+    },
+    "clusterCIDR": "10.244.0.0/16",
+    "nodePortAddresses": null,
+    "oomScoreAdj": -999,
+    "conntrack": {
+      "maxPerCore": 0,
+      "min": 131072,
+      "tcpEstablishedTimeout": "24h0m0s",
+      "tcpCloseWaitTimeout": "1h0m0s",
+      "tcpBeLiberal": false,
+      "udpTimeout": "0s",
+      "udpStreamTimeout": "0s"
+    },
+    "configSyncPeriod": "15m0s",
+    "portRange": ""
+  },
+  "kubeproxy-safe-rollout-worker": {
+    "kind": "KubeProxyConfiguration",
+    "apiVersion": "kubeproxy.config.k8s.io/v1alpha1",
+    "clientConnection": {
+      "kubeconfig": "/var/lib/kube-proxy/kubeconfig.conf",
+      "acceptContentTypes": "",
+      "contentType": "application/vnd.kubernetes.protobuf",
+      "qps": 5,
+      "burst": 10
+    },
+    "logging": {
+      "format": "text",
+      "flushFrequency": "5s",
+      "verbosity": 0,
+      "options": {
+        "text": {
+          "infoBufferSize": "0"
+        },
+        "json": {
+          "infoBufferSize": "0"
+        }
+      }
+    },
+    "hostnameOverride": "kubeproxy-safe-rollout-worker",
+    "bindAddress": "0.0.0.0",
+    "healthzBindAddress": "0.0.0.0:10256",
+    "metricsBindAddress": "127.0.0.1:10249",
+    "bindAddressHardFail": false,
+    "enableProfiling": false,
+    "showHiddenMetricsForVersion": "",
+    "mode": "iptables",
+    "iptables": {
+      "masqueradeBit": 14,
+      "masqueradeAll": false,
+      "localhostNodePorts": true,
+      "syncPeriod": "30s",
+      "minSyncPeriod": "1s"
+    },
+    "ipvs": {
+      "syncPeriod": "0s",
+      "minSyncPeriod": "0s",
+      "scheduler": "",
+      "excludeCIDRs": null,
+      "strictARP": false,
+      "tcpTimeout": "0s",
+      "tcpFinTimeout": "0s",
+      "udpTimeout": "0s"
+    },
+    "nftables": {
+      "masqueradeBit": 14,
+      "masqueradeAll": false,
+      "syncPeriod": "0s",
+      "minSyncPeriod": "0s"
+    },
+    "winkernel": {
+      "networkName": "",
+      "sourceVip": "",
+      "enableDSR": false,
+      "rootHnsEndpointName": "",
+      "forwardHealthCheckVip": false
+    },
+    "detectLocalMode": "ClusterCIDR",
+    "detectLocal": {
+      "bridgeInterface": "",
+      "interfaceNamePrefix": ""
+    },
+    "clusterCIDR": "10.244.0.0/16",
+    "nodePortAddresses": null,
+    "oomScoreAdj": -999,
+    "conntrack": {
+      "maxPerCore": 0,
+      "min": 131072,
+      "tcpEstablishedTimeout": "24h0m0s",
+      "tcpCloseWaitTimeout": "1h0m0s",
+      "tcpBeLiberal": false,
+      "udpTimeout": "0s",
+      "udpStreamTimeout": "0s"
+    },
+    "configSyncPeriod": "15m0s",
+    "portRange": ""
+  },
+  "kubeproxy-safe-rollout-control-plane": {
+    "kind": "KubeProxyConfiguration",
+    "apiVersion": "kubeproxy.config.k8s.io/v1alpha1",
+    "clientConnection": {
+      "kubeconfig": "/var/lib/kube-proxy/kubeconfig.conf",
+      "acceptContentTypes": "",
+      "contentType": "application/vnd.kubernetes.protobuf",
+      "qps": 5,
+      "burst": 10
+    },
+    "logging": {
+      "format": "text",
+      "flushFrequency": "5s",
+      "verbosity": 0,
+      "options": {
+        "text": {
+          "infoBufferSize": "0"
+        },
+        "json": {
+          "infoBufferSize": "0"
+        }
+      }
+    },
+    "hostnameOverride": "kubeproxy-safe-rollout-control-plane",
+    "bindAddress": "0.0.0.0",
+    "healthzBindAddress": "0.0.0.0:10256",
+    "metricsBindAddress": "127.0.0.1:10249",
+    "bindAddressHardFail": false,
+    "enableProfiling": false,
+    "showHiddenMetricsForVersion": "",
+    "mode": "iptables",
+    "iptables": {
+      "masqueradeBit": 14,
+      "masqueradeAll": false,
+      "localhostNodePorts": true,
+      "syncPeriod": "30s",
+      "minSyncPeriod": "1s"
+    },
+    "ipvs": {
+      "syncPeriod": "0s",
+      "minSyncPeriod": "0s",
+      "scheduler": "",
+      "excludeCIDRs": null,
+      "strictARP": false,
+      "tcpTimeout": "0s",
+      "tcpFinTimeout": "0s",
+      "udpTimeout": "0s"
+    },
+    "nftables": {
+      "masqueradeBit": 14,
+      "masqueradeAll": false,
+      "syncPeriod": "0s",
+      "minSyncPeriod": "0s"
+    },
+    "winkernel": {
+      "networkName": "",
+      "sourceVip": "",
+      "enableDSR": false,
+      "rootHnsEndpointName": "",
+      "forwardHealthCheckVip": false
+    },
+    "detectLocalMode": "ClusterCIDR",
+    "detectLocal": {
+      "bridgeInterface": "",
+      "interfaceNamePrefix": ""
+    },
+    "clusterCIDR": "10.244.0.0/16",
+    "nodePortAddresses": null,
+    "oomScoreAdj": -999,
+    "conntrack": {
+      "maxPerCore": 0,
+      "min": 131072,
+      "tcpEstablishedTimeout": "24h0m0s",
+      "tcpCloseWaitTimeout": "1h0m0s",
+      "tcpBeLiberal": false,
+      "udpTimeout": "0s",
+      "udpStreamTimeout": "0s"
+    },
+    "configSyncPeriod": "15m0s",
+    "portRange": ""
+  }
+}

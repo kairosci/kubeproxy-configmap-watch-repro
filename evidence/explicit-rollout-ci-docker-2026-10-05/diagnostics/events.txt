@@ -1,0 +1,142 @@
+LAST SEEN   TYPE      REASON              OBJECT                                                             MESSAGE
+6m19s       Warning   FailedScheduling    pod/coredns-674b8bbfcf-q2zx6                                       0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+6m7s        Normal    Scheduled           pod/coredns-674b8bbfcf-q2zx6                                       Successfully assigned kube-system/coredns-674b8bbfcf-q2zx6 to kubeproxy-safe-rollout-control-plane
+6m6s        Normal    Pulled              pod/coredns-674b8bbfcf-q2zx6                                       Container image "registry.k8s.io/coredns/coredns:v1.12.0" already present on machine
+6m3s        Normal    Created             pod/coredns-674b8bbfcf-q2zx6                                       Created container: coredns
+6m2s        Normal    Started             pod/coredns-674b8bbfcf-q2zx6                                       Started container coredns
+6m19s       Warning   FailedScheduling    pod/coredns-674b8bbfcf-vxz29                                       0/1 nodes are available: 1 node(s) had untolerated taint {node.kubernetes.io/not-ready: }. preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+6m7s        Normal    Scheduled           pod/coredns-674b8bbfcf-vxz29                                       Successfully assigned kube-system/coredns-674b8bbfcf-vxz29 to kubeproxy-safe-rollout-control-plane
+6m6s        Normal    Pulled              pod/coredns-674b8bbfcf-vxz29                                       Container image "registry.k8s.io/coredns/coredns:v1.12.0" already present on machine
+6m2s        Normal    Created             pod/coredns-674b8bbfcf-vxz29                                       Created container: coredns
+6m1s        Normal    Started             pod/coredns-674b8bbfcf-vxz29                                       Started container coredns
+6m19s       Normal    SuccessfulCreate    replicaset/coredns-674b8bbfcf                                      Created pod: coredns-674b8bbfcf-q2zx6
+6m19s       Normal    SuccessfulCreate    replicaset/coredns-674b8bbfcf                                      Created pod: coredns-674b8bbfcf-vxz29
+6m19s       Normal    ScalingReplicaSet   deployment/coredns                                                 Scaled up replica set coredns-674b8bbfcf from 0 to 2
+6m32s       Normal    Pulled              pod/etcd-kubeproxy-safe-rollout-control-plane                      Container image "registry.k8s.io/etcd:3.5.21-0" already present on machine
+6m30s       Normal    Created             pod/etcd-kubeproxy-safe-rollout-control-plane                      Created container: etcd
+6m30s       Normal    Started             pod/etcd-kubeproxy-safe-rollout-control-plane                      Started container etcd
+6m19s       Normal    Scheduled           pod/kindnet-kq7dq                                                  Successfully assigned kube-system/kindnet-kq7dq to kubeproxy-safe-rollout-control-plane
+6m18s       Normal    Pulled              pod/kindnet-kq7dq                                                  Container image "docker.io/kindest/kindnetd:v20250512-df8de77b" already present on machine
+6m18s       Normal    Created             pod/kindnet-kq7dq                                                  Created container: kindnet-cni
+6m17s       Normal    Started             pod/kindnet-kq7dq                                                  Started container kindnet-cni
+6m14s       Normal    Scheduled           pod/kindnet-x5629                                                  Successfully assigned kube-system/kindnet-x5629 to kubeproxy-safe-rollout-worker2
+6m13s       Normal    Pulled              pod/kindnet-x5629                                                  Container image "docker.io/kindest/kindnetd:v20250512-df8de77b" already present on machine
+6m12s       Normal    Created             pod/kindnet-x5629                                                  Created container: kindnet-cni
+6m11s       Normal    Started             pod/kindnet-x5629                                                  Started container kindnet-cni
+6m14s       Normal    Scheduled           pod/kindnet-zdnmc                                                  Successfully assigned kube-system/kindnet-zdnmc to kubeproxy-safe-rollout-worker
+6m13s       Normal    Pulled              pod/kindnet-zdnmc                                                  Container image "docker.io/kindest/kindnetd:v20250512-df8de77b" already present on machine
+6m11s       Normal    Created             pod/kindnet-zdnmc                                                  Created container: kindnet-cni
+6m11s       Normal    Started             pod/kindnet-zdnmc                                                  Started container kindnet-cni
+6m19s       Normal    SuccessfulCreate    daemonset/kindnet                                                  Created pod: kindnet-kq7dq
+6m14s       Normal    SuccessfulCreate    daemonset/kindnet                                                  Created pod: kindnet-x5629
+6m14s       Normal    SuccessfulCreate    daemonset/kindnet                                                  Created pod: kindnet-zdnmc
+6m32s       Normal    Pulled              pod/kube-apiserver-kubeproxy-safe-rollout-control-plane            Container image "registry.k8s.io/kube-apiserver:v1.33.1" already present on machine
+6m31s       Normal    Created             pod/kube-apiserver-kubeproxy-safe-rollout-control-plane            Created container: kube-apiserver
+6m31s       Normal    Started             pod/kube-apiserver-kubeproxy-safe-rollout-control-plane            Started container kube-apiserver
+6m32s       Normal    Pulled              pod/kube-controller-manager-kubeproxy-safe-rollout-control-plane   Container image "registry.k8s.io/kube-controller-manager:v1.33.1" already present on machine
+6m31s       Normal    Created             pod/kube-controller-manager-kubeproxy-safe-rollout-control-plane   Created container: kube-controller-manager
+6m31s       Normal    Started             pod/kube-controller-manager-kubeproxy-safe-rollout-control-plane   Started container kube-controller-manager
+6m25s       Normal    LeaderElection      lease/kube-controller-manager                                      kubeproxy-safe-rollout-control-plane_eb7daf2e-a47d-49e9-9fae-1f28dcc38ce9 became leader
+106s        Normal    Scheduled           pod/kube-proxy-2kzcv                                               Successfully assigned kube-system/kube-proxy-2kzcv to kubeproxy-safe-rollout-control-plane
+105s        Normal    Pulled              pod/kube-proxy-2kzcv                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+105s        Normal    Created             pod/kube-proxy-2kzcv                                               Created container: kube-proxy
+105s        Normal    Started             pod/kube-proxy-2kzcv                                               Started container kube-proxy
+5m27s       Normal    Scheduled           pod/kube-proxy-2lvmf                                               Successfully assigned kube-system/kube-proxy-2lvmf to kubeproxy-safe-rollout-worker2
+5m26s       Normal    Pulled              pod/kube-proxy-2lvmf                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+5m26s       Normal    Created             pod/kube-proxy-2lvmf                                               Created container: kube-proxy
+5m26s       Normal    Started             pod/kube-proxy-2lvmf                                               Started container kube-proxy
+118s        Normal    Killing             pod/kube-proxy-2lvmf                                               Stopping container kube-proxy
+5m27s       Normal    Scheduled           pod/kube-proxy-2rkfq                                               Successfully assigned kube-system/kube-proxy-2rkfq to kubeproxy-safe-rollout-worker
+5m26s       Normal    Pulled              pod/kube-proxy-2rkfq                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+5m26s       Normal    Created             pod/kube-proxy-2rkfq                                               Created container: kube-proxy
+5m26s       Normal    Started             pod/kube-proxy-2rkfq                                               Started container kube-proxy
+95s         Normal    Killing             pod/kube-proxy-2rkfq                                               Stopping container kube-proxy
+117s        Normal    Scheduled           pod/kube-proxy-cfrpp                                               Successfully assigned kube-system/kube-proxy-cfrpp to kubeproxy-safe-rollout-worker2
+117s        Normal    Pulled              pod/kube-proxy-cfrpp                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+117s        Normal    Created             pod/kube-proxy-cfrpp                                               Created container: kube-proxy
+117s        Normal    Started             pod/kube-proxy-cfrpp                                               Started container kube-proxy
+81s         Normal    Killing             pod/kube-proxy-cfrpp                                               Stopping container kube-proxy
+95s         Normal    Scheduled           pod/kube-proxy-h8s2g                                               Successfully assigned kube-system/kube-proxy-h8s2g to kubeproxy-safe-rollout-worker
+94s         Normal    Pulled              pod/kube-proxy-h8s2g                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+94s         Normal    Created             pod/kube-proxy-h8s2g                                               Created container: kube-proxy
+94s         Normal    Started             pod/kube-proxy-h8s2g                                               Started container kube-proxy
+94s         Warning   Unhealthy           pod/kube-proxy-h8s2g                                               Readiness probe failed: Get "http://172.18.0.3:10256/healthz": dial tcp 172.18.0.3:10256: connect: connection refused
+6m19s       Normal    Scheduled           pod/kube-proxy-jknjt                                               Successfully assigned kube-system/kube-proxy-jknjt to kubeproxy-safe-rollout-control-plane
+6m18s       Normal    Pulled              pod/kube-proxy-jknjt                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+6m18s       Normal    Created             pod/kube-proxy-jknjt                                               Created container: kube-proxy
+6m18s       Normal    Started             pod/kube-proxy-jknjt                                               Started container kube-proxy
+5m46s       Normal    Killing             pod/kube-proxy-jknjt                                               Stopping container kube-proxy
+5m45s       Normal    Scheduled           pod/kube-proxy-jzqsg                                               Successfully assigned kube-system/kube-proxy-jzqsg to kubeproxy-safe-rollout-control-plane
+5m32s       Normal    Pulled              pod/kube-proxy-jzqsg                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+5m32s       Normal    Created             pod/kube-proxy-jzqsg                                               Created container: kube-proxy
+5m32s       Normal    Started             pod/kube-proxy-jzqsg                                               Started container kube-proxy
+5m27s       Warning   Unhealthy           pod/kube-proxy-jzqsg                                               Readiness probe failed: Get "http://172.18.0.2:10256/healthz": dial tcp 172.18.0.2:10256: connect: connection refused
+5m28s       Normal    Killing             pod/kube-proxy-jzqsg                                               Stopping container kube-proxy
+5m27s       Normal    Scheduled           pod/kube-proxy-km7p6                                               Successfully assigned kube-system/kube-proxy-km7p6 to kubeproxy-safe-rollout-control-plane
+5m26s       Normal    Pulled              pod/kube-proxy-km7p6                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+5m26s       Normal    Created             pod/kube-proxy-km7p6                                               Created container: kube-proxy
+5m26s       Normal    Started             pod/kube-proxy-km7p6                                               Started container kube-proxy
+106s        Normal    Killing             pod/kube-proxy-km7p6                                               Stopping container kube-proxy
+6m          Normal    Scheduled           pod/kube-proxy-qd2jq                                               Successfully assigned kube-system/kube-proxy-qd2jq to kubeproxy-safe-rollout-worker2
+5m32s       Normal    Pulled              pod/kube-proxy-qd2jq                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+5m32s       Normal    Created             pod/kube-proxy-qd2jq                                               Created container: kube-proxy
+5m32s       Normal    Started             pod/kube-proxy-qd2jq                                               Started container kube-proxy
+5m27s       Warning   Unhealthy           pod/kube-proxy-qd2jq                                               Readiness probe failed: Get "http://172.18.0.4:10256/healthz": dial tcp 172.18.0.4:10256: connect: connection refused
+5m28s       Normal    Killing             pod/kube-proxy-qd2jq                                               Stopping container kube-proxy
+81s         Normal    Scheduled           pod/kube-proxy-t7dmr                                               Successfully assigned kube-system/kube-proxy-t7dmr to kubeproxy-safe-rollout-worker2
+33s         Normal    Pulled              pod/kube-proxy-t7dmr                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+33s         Normal    Created             pod/kube-proxy-t7dmr                                               Created container: kube-proxy
+33s         Normal    Started             pod/kube-proxy-t7dmr                                               Started container kube-proxy
+17s         Warning   BackOff             pod/kube-proxy-t7dmr                                               Back-off restarting failed container kube-proxy in pod kube-proxy-t7dmr_kube-system(d2959eea-4ae8-4bdf-b3fa-91cacb877026)
+14s         Normal    Scheduled           pod/kube-proxy-tckts                                               Successfully assigned kube-system/kube-proxy-tckts to kubeproxy-safe-rollout-worker2
+13s         Normal    Pulled              pod/kube-proxy-tckts                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+13s         Normal    Created             pod/kube-proxy-tckts                                               Created container: kube-proxy
+13s         Normal    Started             pod/kube-proxy-tckts                                               Started container kube-proxy
+6m          Normal    Scheduled           pod/kube-proxy-tz4wf                                               Successfully assigned kube-system/kube-proxy-tz4wf to kubeproxy-safe-rollout-worker
+5m32s       Normal    Pulled              pod/kube-proxy-tz4wf                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+5m32s       Normal    Created             pod/kube-proxy-tz4wf                                               Created container: kube-proxy
+5m32s       Normal    Started             pod/kube-proxy-tz4wf                                               Started container kube-proxy
+5m27s       Warning   Unhealthy           pod/kube-proxy-tz4wf                                               Readiness probe failed: Get "http://172.18.0.3:10256/healthz": dial tcp 172.18.0.3:10256: connect: connection refused
+5m28s       Normal    Killing             pod/kube-proxy-tz4wf                                               Stopping container kube-proxy
+6m14s       Normal    Scheduled           pod/kube-proxy-v6zh7                                               Successfully assigned kube-system/kube-proxy-v6zh7 to kubeproxy-safe-rollout-worker2
+6m13s       Normal    Pulled              pod/kube-proxy-v6zh7                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+6m13s       Normal    Created             pod/kube-proxy-v6zh7                                               Created container: kube-proxy
+6m12s       Normal    Started             pod/kube-proxy-v6zh7                                               Started container kube-proxy
+6m6s        Normal    Killing             pod/kube-proxy-v6zh7                                               Stopping container kube-proxy
+6m14s       Normal    Scheduled           pod/kube-proxy-xhhfx                                               Successfully assigned kube-system/kube-proxy-xhhfx to kubeproxy-safe-rollout-worker
+6m13s       Normal    Pulled              pod/kube-proxy-xhhfx                                               Container image "registry.k8s.io/kube-proxy:v1.33.1" already present on machine
+6m12s       Normal    Created             pod/kube-proxy-xhhfx                                               Created container: kube-proxy
+6m12s       Normal    Started             pod/kube-proxy-xhhfx                                               Started container kube-proxy
+6m6s        Normal    Killing             pod/kube-proxy-xhhfx                                               Stopping container kube-proxy
+6m19s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-jknjt
+6m14s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-v6zh7
+6m14s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-xhhfx
+6m6s        Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-xhhfx
+6m6s        Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-v6zh7
+6m          Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-tz4wf
+6m          Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-qd2jq
+5m46s       Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-jknjt
+5m45s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-jzqsg
+5m30s       Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-tz4wf
+5m30s       Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-jzqsg
+5m30s       Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-qd2jq
+5m27s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-2lvmf
+5m27s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-km7p6
+5m27s       Normal    SuccessfulCreate    daemonset/kube-proxy                                               Created pod: kube-proxy-2rkfq
+118s        Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-2lvmf
+14s         Normal    SuccessfulCreate    daemonset/kube-proxy                                               (combined from similar events): Created pod: kube-proxy-tckts
+106s        Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-km7p6
+95s         Normal    SuccessfulDelete    daemonset/kube-proxy                                               Deleted pod: kube-proxy-2rkfq
+14s         Normal    SuccessfulDelete    daemonset/kube-proxy                                               (combined from similar events): Deleted pod: kube-proxy-t7dmr
+6m32s       Normal    Pulled              pod/kube-scheduler-kubeproxy-safe-rollout-control-plane            Container image "registry.k8s.io/kube-scheduler:v1.33.1" already present on machine
+6m31s       Normal    Created             pod/kube-scheduler-kubeproxy-safe-rollout-control-plane            Created container: kube-scheduler
+6m31s       Normal    Started             pod/kube-scheduler-kubeproxy-safe-rollout-control-plane            Started container kube-scheduler
+6m26s       Warning   Unhealthy           pod/kube-scheduler-kubeproxy-safe-rollout-control-plane            Readiness probe failed: HTTP probe failed with statuscode: 500
+6m24s       Normal    LeaderElection      lease/kube-scheduler                                               kubeproxy-safe-rollout-control-plane_1a8b2852-b848-4962-86ce-009fbd4cde6c became leader
+2m5s        Normal    Scheduled           pod/rollout-echo-77dccbfbbf-sgm2b                                  Successfully assigned kube-system/rollout-echo-77dccbfbbf-sgm2b to kubeproxy-safe-rollout-worker
+2m4s        Normal    Pulling             pod/rollout-echo-77dccbfbbf-sgm2b                                  Pulling image "docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e"
+2m4s        Normal    Pulled              pod/rollout-echo-77dccbfbbf-sgm2b                                  Successfully pulled image "docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e" in 583ms (583ms including waiting). Image size: 2222118 bytes.
+2m4s        Normal    Created             pod/rollout-echo-77dccbfbbf-sgm2b                                  Created container: echo
+2m4s        Normal    Started             pod/rollout-echo-77dccbfbbf-sgm2b                                  Started container echo
+2m5s        Normal    SuccessfulCreate    replicaset/rollout-echo-77dccbfbbf                                 Created pod: rollout-echo-77dccbfbbf-sgm2b
+2m5s        Normal    ScalingReplicaSet   deployment/rollout-echo                                            Scaled up replica set rollout-echo-77dccbfbbf from 0 to 1

@@ -1,0 +1,14 @@
+NAME                                                           READY   STATUS    RESTARTS   AGE     IP           NODE                                   NOMINATED NODE   READINESS GATES
+coredns-674b8bbfcf-q2zx6                                       1/1     Running   0          6m19s   10.244.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+coredns-674b8bbfcf-vxz29                                       1/1     Running   0          6m19s   10.244.0.4   kubeproxy-safe-rollout-control-plane   <none>           <none>
+etcd-kubeproxy-safe-rollout-control-plane                      1/1     Running   0          6m27s   172.18.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+kindnet-kq7dq                                                  1/1     Running   0          6m19s   172.18.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+kindnet-x5629                                                  1/1     Running   0          6m14s   172.18.0.4   kubeproxy-safe-rollout-worker2         <none>           <none>
+kindnet-zdnmc                                                  1/1     Running   0          6m14s   172.18.0.3   kubeproxy-safe-rollout-worker          <none>           <none>
+kube-apiserver-kubeproxy-safe-rollout-control-plane            1/1     Running   0          6m26s   172.18.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+kube-controller-manager-kubeproxy-safe-rollout-control-plane   1/1     Running   0          6m26s   172.18.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+kube-proxy-2kzcv                                               1/1     Running   0          106s    172.18.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+kube-proxy-h8s2g                                               1/1     Running   0          95s     172.18.0.3   kubeproxy-safe-rollout-worker          <none>           <none>
+kube-proxy-tckts                                               1/1     Running   0          14s     172.18.0.4   kubeproxy-safe-rollout-worker2         <none>           <none>
+kube-scheduler-kubeproxy-safe-rollout-control-plane            1/1     Running   0          6m27s   172.18.0.2   kubeproxy-safe-rollout-control-plane   <none>           <none>
+rollout-echo-77dccbfbbf-sgm2b                                  1/1     Running   0          2m5s    10.244.2.2   kubeproxy-safe-rollout-worker          <none>           <none>

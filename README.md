@@ -23,6 +23,8 @@ A readiness probe is essential for this failure-containment check: the default k
 
 The [successful local three-node run](evidence/explicit-rollout-local-2026-10-05/) used rootless Podman on Linux amd64. Both unit tests and race-detector tests passed. The baseline restarted all three containers on direct writes. The patched run passed both 60-second no-restart checks, the valid rollout (minimum two ready nodes observed), the invalid-config containment check, Service forwarding, and rollback to three ready pods. The evidence includes both binaries' hashes, the source revision, and the patch hash.
 
+The [Docker CI run](https://github.com/kairosci/kubeproxy-configmap-watch-repro/actions/runs/37342343179) also passed the full three-node comparison on Ubuntu 24.04. Its [permanent evidence](evidence/explicit-rollout-ci-docker-2026-10-05/) preserves the build information, baseline and patched results, `/configz` snapshots, rollout samples, startup failure log and diagnostics. The original unmodified-image reproduction passed again in its [separate CI run](https://github.com/kairosci/kubeproxy-configmap-watch-repro/actions/runs/37342343291).
+
 ### Run the rollout verification locally
 
 Use Go 1.27.1, the pinned kind/kubectl tools described below, and a dedicated clone of Kubernetes. Build the baseline before applying the patch:

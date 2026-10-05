@@ -1,0 +1,6 @@
+2026-10-05T16:41:47+0000 INSTALLED {"kubeproxy-safe-rollout-worker2": {"pod": "kube-proxy-2lvmf", "uid": "a644f156-e9c2-4e89-a52d-08d3994ecd25", "containerID": "containerd://b05f2645d5eb5923dfd049d0877ed601ceda273d813a8f4127ee704684f7c701", "restarts": 0, "ready": true, "configMap": "kube-proxy"}, "kubeproxy-safe-rollout-worker": {"pod": "kube-proxy-2rkfq", "uid": "212fdfcc-4078-42cb-80fb-4d920adf783c", "containerID": "containerd://c196488a861d0d2da57bf1d0e373f43dc283f9146c266060f3c904007fec04e7", "restarts": 0, "ready": true, "configMap": "kube-proxy"}, "kubeproxy-safe-rollout-control-plane": {"pod": "kube-proxy-km7p6", "uid": "d476635a-2dcf-4aaa-9cfa-a9e616c230a3", "containerID": "containerd://48bef8a8c6adddd3f82817a656f20c0121caa98b3e1e50a68699e63c20625121", "restarts": 0, "ready": true, "configMap": "kube-proxy"}}
+2026-10-05T16:42:49+0000 DIRECT WRITE: unchanged identities, readiness and loaded verbosity for 60 seconds
+2026-10-05T16:44:52+0000 CONFIGMAP PROJECTION: unchanged identities, readiness and loaded verbosity for 60 seconds
+2026-10-05T16:45:36+0000 GOOD ROLLOUT: three replacements, loaded verbosity 1, at least two ready nodes
+2026-10-05T16:46:43+0000 BAD ROLLOUT: stopped at one failing pod for 60 seconds; two original pods still forward Service traffic
+2026-10-05T16:46:56+0000 PASS: rollback restored three ready kube-proxy pods
